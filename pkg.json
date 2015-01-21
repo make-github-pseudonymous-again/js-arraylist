@@ -1,0 +1,17 @@
+{
+	"code": {
+		"main": [
+			"js",
+			"dist",
+			"arraylist.js"
+		],
+		"test": [
+			"test",
+			"js"
+		]
+	},
+	"out": "js/dist/",
+	"ns": "arraylist",
+	"debug": false,
+	"src": "js/src/"
+}

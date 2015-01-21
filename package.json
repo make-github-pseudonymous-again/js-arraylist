@@ -1,0 +1,37 @@
+{
+	"license": "AGPL-3.0",
+	"homepage": "http://aureooms.github.io/js-arraylist/",
+	"dependencies": {},
+	"keywords": [
+		"amortized",
+		"array",
+		"bricks",
+		"dynamically",
+		"javascript",
+		"js",
+		"list",
+		"sized",
+		"time",
+		"vector"
+	],
+	"repository": {
+		"url": "https://github.com/aureooms/js-arraylist.git",
+		"type": "git"
+	},
+	"version": "0.0.0",
+	"scripts": {
+		"doc": "./node_modules/.bin/groc",
+		"build": "./node_modules/.bin/aureooms-node-package-build",
+		"test": "./node_modules/.bin/aureooms-node-package-test"
+	},
+	"devDependencies": {
+		"aureooms-node-package": "^1.2.0"
+	},
+	"bugs": {
+		"url": "https://github.com/aureooms/js-arraylist/issues"
+	},
+	"author": "aureooms",
+	"description": "dynamically sized array code bricks for JavaScript",
+	"name": "aureooms-js-arraylist",
+	"main": "js/dist/arraylist.js"
+}
