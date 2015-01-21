@@ -1,0 +1,277 @@
+<!DOCTYPE html><html lang="en"><head><title>ArrayList</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="ArrayList"><meta name="groc-project-path" content="js/src/ArrayList.js"><meta name="groc-github-url" content="https://github.com/aureooms/js-arraylist"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path"><a href="https://github.com/aureooms/js-arraylist/blob/master/js/src/ArrayList.js">js/src/ArrayList.js</a></div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-keyword">var</span> __ArrayList__ = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( initialcapacity , growthrate , alloc , realloc )</span> {</span>
+
+	<span class="hljs-keyword">var</span> grs = growthrate * growthrate ;
+
+	<span class="hljs-keyword">var</span> ArrayList = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( )</span> {</span>
+
+		<span class="hljs-keyword">this</span>.data = alloc( initialcapacity ) ;
+		<span class="hljs-keyword">this</span>.capacity = initialcapacity ;
+		<span class="hljs-keyword">this</span>.length = <span class="hljs-number">0</span> ;
+
+	} ;
+
+	<span class="hljs-keyword">var</span> Iterator = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( reference , current )</span> {</span>
+		<span class="hljs-keyword">this</span>.reference = reference ;
+		<span class="hljs-keyword">this</span>.current = current ;
+	} ;
+
+	<span class="hljs-keyword">var</span> ReverseIterator = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( reference , current )</span> {</span>
+		<span class="hljs-keyword">this</span>.reference = reference ;
+		<span class="hljs-keyword">this</span>.current = current ;
+	} ;
+
+	ArrayList.prototype.get = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( index )</span> {</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.data[index] ;
+	} ;
+
+	ArrayList.prototype.set = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( index , value )</span> {</span>
+		<span class="hljs-keyword">this</span>.data[index] = value ;
+	} ;
+
+	ArrayList.prototype.grow = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( len )</span> {</span>
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">this</span>.capacity &lt; len ) {
+
+			<span class="hljs-keyword">this</span>.capacity = len * growthrate ;
+
+			<span class="hljs-keyword">this</span>.data = realloc( <span class="hljs-keyword">this</span>.data , <span class="hljs-keyword">this</span>.capacity ) ;
+
+		}
+
+	} ;
+
+	ArrayList.prototype.shrink = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( len )</span> {</span>
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">this</span>.capacity &gt;= len * grs ) {
+
+			<span class="hljs-keyword">this</span>.capacity = len * growthrate ;
+
+			<span class="hljs-keyword">this</span>.data = realloc( <span class="hljs-keyword">this</span>.data , <span class="hljs-keyword">this</span>.capacity ) ;
+
+		}
+
+	} ;
+
+	ArrayList.prototype.moveright = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( i , j , k )</span> {</span>
+
+		<span class="hljs-keyword">while</span> ( --j &gt;= i ) {
+			<span class="hljs-keyword">this</span>.data[j+k] = <span class="hljs-keyword">this</span>.data[j] ;
+		}
+
+	} ;
+
+	ArrayList.prototype.moveleft = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( i , j , k )</span> {</span>
+
+		<span class="hljs-keyword">for</span> ( ; i &lt; j ; ++i ) {
+			<span class="hljs-keyword">this</span>.data[i-k] = <span class="hljs-keyword">this</span>.data[i] ;
+		}
+
+	} ;
+
+	ArrayList.prototype.insertAt = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( index , value )</span> {</span>
+
+		<span class="hljs-keyword">var</span> len ;
+
+		len = <span class="hljs-keyword">this</span>.length ;
+
+		++<span class="hljs-keyword">this</span>.length ;
+
+		<span class="hljs-keyword">this</span>.grow( <span class="hljs-keyword">this</span>.length ) ;
+
+		<span class="hljs-keyword">this</span>.moveright( index , len , <span class="hljs-number">1</span> ) ;
+
+		<span class="hljs-keyword">this</span>.data[index] = value ;
+
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.iterator( index ) ;
+
+	} ;
+
+	ArrayList.prototype.eraseAt = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( index )</span> {</span>
+
+		<span class="hljs-keyword">this</span>.eraseFromTo( index , index + <span class="hljs-number">1</span> ) ;
+
+	} ;
+
+	ArrayList.prototype.eraseFromTo = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( i , j )</span> {</span>
+
+		<span class="hljs-keyword">var</span> n ;
+
+		n = j - i ;
+
+		<span class="hljs-keyword">this</span>.moveleft( j , <span class="hljs-keyword">this</span>.length , n ) ;
+
+		<span class="hljs-keyword">this</span>.length -= n ;
+
+		<span class="hljs-keyword">this</span>.shrink( <span class="hljs-keyword">this</span>.length ) ;
+
+	} ;
+
+
+	ArrayList.prototype.insertAfter = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( iterator , value )</span> {</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.insertAt( iterator.current + <span class="hljs-number">1</span> ,  value ) ;
+	} ;
+
+	ArrayList.prototype.insertBefore = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( iterator , value )</span> {</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.insertAt( iterator.current , value ) ;
+	} ;
+
+	ArrayList.prototype.unshift = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( value )</span> {</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.insertAfter( <span class="hljs-keyword">this</span>.begin( ) , value ) ;
+	} ;
+
+	ArrayList.prototype.push = <span class="hljs-function"><span class="hljs-keyword">function</span><span class="hljs-params">(value)</span>{</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.insertBefore( <span class="hljs-keyword">this</span>.end( ) , value ) ;
+	} ;
+
+	ArrayList.prototype.erase = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( iterator )</span> {</span>
+
+		<span class="hljs-keyword">var</span> index ;
+
+		index = iterator.current ;
+
+		<span class="hljs-keyword">this</span>.eraseAt( index ) ;
+
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.iterator( index ) ;
+
+	} ;
+
+	ArrayList.prototype.rerase = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( iterator )</span> {</span>
+
+		<span class="hljs-keyword">var</span> index ;
+
+		index = iterator.current ;
+
+		<span class="hljs-keyword">this</span>.eraseAt( index ) ;
+
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.iterator( index - <span class="hljs-number">1</span> ) ;
+
+	} ;
+
+	ArrayList.prototype.eraserange = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( first , last )</span> {</span>
+
+		<span class="hljs-keyword">this</span>.eraseFromTo( first.current , last.current ) ;
+
+		<span class="hljs-keyword">return</span> first.copy( ) ;
+
+	} ;
+
+	ArrayList.prototype.reraserange = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( first , last )</span> {</span>
+
+		<span class="hljs-keyword">this</span>.eraseFromTo( last.current + <span class="hljs-number">1</span> , first.current + <span class="hljs-number">1</span> ) ;
+
+		<span class="hljs-keyword">return</span> last.copy( ) ;
+
+	} ;
+
+	ArrayList.prototype.shift = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( )</span> {</span>
+
+		<span class="hljs-keyword">var</span> it , e ;
+
+		it = <span class="hljs-keyword">this</span>.begin( ) ;
+		e = it.next( ) ;
+
+		<span class="hljs-keyword">if</span> ( e.done ) {
+			<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span> ;
+		}
+
+		<span class="hljs-keyword">this</span>.rerase( it ) ;
+
+		<span class="hljs-keyword">return</span> e.value ;
+
+	} ;
+
+	ArrayList.prototype.pop = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( )</span> {</span>
+
+		<span class="hljs-keyword">var</span> it , e ;
+
+		it = <span class="hljs-keyword">this</span>.rbegin( ) ;
+		e = it.next( ) ;
+
+		<span class="hljs-keyword">if</span> ( e.done ) {
+			<span class="hljs-keyword">return</span> <span class="hljs-literal">null</span> ;
+		}
+
+		<span class="hljs-keyword">this</span>.erase( it ) ;
+
+		<span class="hljs-keyword">return</span> e.value ;
+
+	} ;
+
+	ArrayList.prototype.clear = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( )</span> {</span>
+
+		<span class="hljs-keyword">this</span>.data = realloc( <span class="hljs-keyword">this</span>.data , initialcapacity ) ;
+		<span class="hljs-keyword">this</span>.capacity = initialcapacity ;
+		<span class="hljs-keyword">this</span>.length = <span class="hljs-number">0</span> ;
+
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span> ;
+
+	} ;
+
+	ArrayList.prototype.iterator = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( index )</span> {</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Iterator( <span class="hljs-keyword">this</span> , index ) ;
+	} ;
+
+	ArrayList.prototype.riterator = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( index )</span> {</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ReverseIterator( <span class="hljs-keyword">this</span> , index ) ;
+	} ;
+
+	ArrayList.prototype.begin = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( )</span> {</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.iterator( -<span class="hljs-number">1</span> ) ;
+	} ;
+
+	ArrayList.prototype.end = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( )</span> {</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.iterator( <span class="hljs-keyword">this</span>.length ) ;
+	} ;
+
+	ArrayList.prototype.rbegin = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( )</span> {</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.riterator( <span class="hljs-keyword">this</span>.length );
+	} ;
+
+	ArrayList.prototype.rend = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( )</span> {</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.riterator( -<span class="hljs-number">1</span> ) ;
+	} ;
+
+	Iterator.prototype.copy = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( )</span> {</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Iterator( <span class="hljs-keyword">this</span>.reference , <span class="hljs-keyword">this</span>.current ) ;
+	} ;
+
+	ReverseIterator.prototype.copy = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( )</span> {</span>
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> ReverseIterator( <span class="hljs-keyword">this</span>.reference , <span class="hljs-keyword">this</span>.current ) ;
+	} ;
+
+	Iterator.prototype.next = ReverseIterator.prototype.prev = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( )</span> {</span>
+
+		++<span class="hljs-keyword">this</span>.current ;
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">this</span>.current === <span class="hljs-keyword">this</span>.reference.length ) {
+			<span class="hljs-keyword">return</span> { done : <span class="hljs-literal">true</span> } ;
+		}
+
+		<span class="hljs-keyword">else</span> {
+			<span class="hljs-keyword">return</span> { done : <span class="hljs-literal">false</span> , value : <span class="hljs-keyword">this</span>.reference.get( <span class="hljs-keyword">this</span>.current ) } ;
+		}
+
+	} ;
+
+	Iterator.prototype.prev = ReverseIterator.prototype.next = <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">( )</span> {</span>
+
+		--<span class="hljs-keyword">this</span>.current ;
+
+		<span class="hljs-keyword">if</span> ( <span class="hljs-keyword">this</span>.current === -<span class="hljs-number">1</span> ) {
+			<span class="hljs-keyword">return</span> { done : <span class="hljs-literal">true</span> } ;
+		}
+
+		<span class="hljs-keyword">else</span> {
+			<span class="hljs-keyword">return</span> { done : <span class="hljs-literal">false</span> , value : <span class="hljs-keyword">this</span>.reference.get( <span class="hljs-keyword">this</span>.current ) } ;
+		}
+
+	} ;
+
+	ArrayList.Iterator = Iterator ;
+	ArrayList.ReverseIterator = ReverseIterator ;
+
+	<span class="hljs-keyword">return</span> ArrayList ;
+
+} ;
+
+exports.__ArrayList__ = __ArrayList__ ;</div></div></div></div></body></html>
