@@ -1,9 +1,3 @@
-(function(exports, undefined){
-
-	'use strict';
-
-
-/* js/src/ArrayList.js */
 
 var __ArrayList__ = function ( initialcapacity , growthrate , alloc , realloc ) {
 
@@ -282,5 +276,3 @@ var __ArrayList__ = function ( initialcapacity , growthrate , alloc , realloc ) 
 } ;
 
 exports.__ArrayList__ = __ArrayList__ ;
-
-})(typeof exports === 'undefined' ? this['arraylist'] = {} : exports);
