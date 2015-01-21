@@ -2,7 +2,7 @@
 	"license": "AGPL-3.0",
 	"homepage": "http://aureooms.github.io/js-arraylist/",
 	"main": "js/dist/arraylist.js",
-	"description": "dynamically sized array code bricks for JavaScript",
+	"description": "dynamic array code bricks for JavaScript",
 	"ignore": [
 		"js/index.js",
 		"js/src",

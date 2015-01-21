@@ -1,7 +1,7 @@
 [js-arraylist](http://aureooms.github.io/js-arraylist)
 ==
 
-dynamically sized array code bricks for JavaScript
+dynamic array code bricks for JavaScript
 
 [![NPM license](http://img.shields.io/npm/l/aureooms-js-arraylist.svg?style=flat)](https://raw.githubusercontent.com/aureooms/js-arraylist/master/LICENSE)
 [![NPM version](http://img.shields.io/npm/v/aureooms-js-arraylist.svg?style=flat)](https://www.npmjs.org/package/aureooms-js-arraylist)
