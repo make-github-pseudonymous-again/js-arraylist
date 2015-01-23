@@ -38,17 +38,7 @@ test("ArrayList", function(){
 
 	alloc = array.alloc ;
 
-	realloc = function ( data , len ) {
-
-		var pt ;
-
-		pt = alloc( len ) ;
-
-		array.copy( data , 0 , Math.min( data.length , len ) , pt , 0 ) ;
-
-		return pt ;
-
-	} ;
+	realloc = array.realloc ;
 
 	var ArrayList = arraylist.__ArrayList__( 0 , 2 , alloc , realloc );
 

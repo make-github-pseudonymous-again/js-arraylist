@@ -24,7 +24,7 @@
 		"test": "./node_modules/.bin/aureooms-node-package-test"
 	},
 	"devDependencies": {
-		"aureooms-js-array": "^1.1.0",
+		"aureooms-js-array": "^2.0.1",
 		"aureooms-node-package": "^1.2.0"
 	},
 	"bugs": {
