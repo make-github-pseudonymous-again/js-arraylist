@@ -17,7 +17,7 @@
 		"url": "https://github.com/aureooms/js-arraylist.git",
 		"type": "git"
 	},
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"scripts": {
 		"doc": "./node_modules/.bin/groc",
 		"build": "./node_modules/.bin/aureooms-node-package-build",
