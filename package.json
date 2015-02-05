@@ -25,6 +25,7 @@
 	},
 	"devDependencies": {
 		"aureooms-js-array": "^2.0.1",
+		"aureooms-js-list-spec": "^8.0.0",
 		"aureooms-node-package": "^1.2.0"
 	},
 	"bugs": {
