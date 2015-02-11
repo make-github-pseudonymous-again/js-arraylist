@@ -4,7 +4,7 @@
 	"scripts": [
 		"js/dist/arraylist.js"
 	],
-	"version": "1.0.1",
+	"version": "1.0.2",
 	"description": "dynamic array code bricks for JavaScript",
 	"main": "js/dist/arraylist.js",
 	"license": "AGPL-3.0"
