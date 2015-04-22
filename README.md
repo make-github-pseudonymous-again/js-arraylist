@@ -13,3 +13,4 @@ dynamic array code bricks for JavaScript
 [![Code Climate](http://img.shields.io/codeclimate/github/aureooms/js-arraylist.svg?style=flat)](https://codeclimate.com/github/aureooms/js-arraylist)
 [![NPM downloads per month](http://img.shields.io/npm/dm/aureooms-js-arraylist.svg?style=flat)](https://www.npmjs.org/package/aureooms-js-arraylist)
 [![GitHub issues](http://img.shields.io/github/issues/aureooms/js-arraylist.svg?style=flat)](https://github.com/aureooms/js-arraylist/issues)
+[![Inline docs](http://inch-ci.org/github/aureooms/js-arraylist.svg?branch=master&style=shields)](http://inch-ci.org/github/aureooms/js-arraylist)
