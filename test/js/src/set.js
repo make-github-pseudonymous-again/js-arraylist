@@ -1,7 +1,7 @@
 
 var array , daToArrayForward , daToArrayBackward ;
 
-array = require( "aureooms-js-array" ) ;
+array = require( "@aureooms/js-array" ) ;
 
 daToArrayForward = function (da) {
 	var array = [];
