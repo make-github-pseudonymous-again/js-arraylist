@@ -4,7 +4,7 @@
 Dynamic array code bricks for JavaScript. Parent is
 [aureooms/js-data-structures](https://github.com/aureooms/js-data-structures).
 
-[![NPM license](https://img.shields.io/npm/l/@aureooms/js-arraylist.svg?style=flat)](https://raw.githubusercontent.com/aureooms/js-arraylist/master/LICENSE)
+[![License](https://img.shields.io/github/license/aureooms/js-arraylist.svg?style=flat)](https://raw.githubusercontent.com/aureooms/js-arraylist/master/LICENSE)
 [![NPM version](https://img.shields.io/npm/v/@aureooms/js-arraylist.svg?style=flat)](https://www.npmjs.org/package/@aureooms/js-arraylist)
 [![Bower version](https://img.shields.io/bower/v/@aureooms/js-arraylist.svg?style=flat)](http://bower.io/search/?q=@aureooms/js-arraylist)
 [![Build Status](https://img.shields.io/travis/aureooms/js-arraylist.svg?style=flat)](https://travis-ci.org/aureooms/js-arraylist)
