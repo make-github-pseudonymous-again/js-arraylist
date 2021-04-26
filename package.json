@@ -14,7 +14,7 @@
 		"vector"
 	],
 	"repository": {
-		"url": "https://github.com/aureooms/js-arraylist.git",
+		"url": "https://github.com/make-github-pseudonymous-again/js-arraylist.git",
 		"type": "git"
 	},
 	"version": "1.0.3",
@@ -29,7 +29,7 @@
 		"aureooms-node-package": "^6.0.1"
 	},
 	"bugs": {
-		"url": "https://github.com/aureooms/js-arraylist/issues"
+		"url": "https://github.com/make-github-pseudonymous-again/js-arraylist/issues"
 	},
 	"author": "aureooms",
 	"description": "dynamically sized array code bricks for JavaScript",
