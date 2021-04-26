@@ -1,4 +1,4 @@
-[js-arraylist](http://aureooms.github.io/js-arraylist)
+[js-arraylist](http://make-github-pseudonymous-again.github.io/js-arraylist)
 ==
 
 Dynamic array code bricks for JavaScript. Parent is
